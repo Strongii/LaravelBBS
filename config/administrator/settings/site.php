@@ -46,7 +46,7 @@ return [
 
     // 表单验证规则
     'rules' => [
-        'site_name' => 'required|max:50',
+       // 'site_name' => 'required|max:50',
         'contact_email' => 'email',
     ],
 
@@ -59,8 +59,8 @@ return [
     'before_save' => function(&$data)
     {
         // 为网站名称加上后缀，加上判断是为了防止多次添加
-        if (strpos($data['site_name'], 'Powered by LaraBBS') === false) {
-            $data['site_name'] .= ' - Powered by LaraBBS';
+        if (strpos($data['site_name'], 'by 菜鸡') === false) {
+            $data['site_name'] .= 'by 菜鸡';
         }
     },
 
