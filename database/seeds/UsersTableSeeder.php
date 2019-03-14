@@ -41,8 +41,8 @@ class UsersTableSeeder extends Seeder
 
         // 单独处理第一个用户的数据
         $user = User::find(1);
-        $user->name = 'Summer';
-        $user->email = 'summer@yousails.com';
+        $user->name = '装逼王我当定了';
+        $user->email = '823479033@qq.com';
         $user->avatar = 'http://www.yutudou.com/uploads/allimg/170809/1-1FP9221236.jpg';
         $user->save();
 
