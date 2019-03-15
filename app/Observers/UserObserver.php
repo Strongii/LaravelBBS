@@ -20,7 +20,7 @@ class UserObserver
     }
     public function saving(User $user){
         if (empty($user->avatar)) {
-            $user->avatar = 'https://fsdhubcdn.phphub.org/uploads/images/201710/30/1/TrJS40Ey5k.png';
+            $user->avatar = 'http://www.yutudou.com/uploads/allimg/170809/1-1FP9221236.jpg';
         }
     }
 }
