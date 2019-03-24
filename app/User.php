@@ -6,16 +6,21 @@ use App\Models\Reply;
 use App\Models\Topic;
 use App\Models\Traits\ActiveUserHelper;
 use App\Models\Traits\LastActivedAtHelper;
+use App\Models\Traits\SignIn;
 use Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Redis;
+
 
 class User extends Authenticatable implements JWTSubject
 {
+
     use LastActivedAtHelper;
     use ActiveUserHelper;
+    use SignIn;
     use HasRoles;
     use Notifiable {
         notify as protected laravelNotify;
@@ -29,6 +34,7 @@ class User extends Authenticatable implements JWTSubject
         $this->increment('notification_count');
         $this->laravelNotify($instance);
     }
+
     public function markAsRead()
     {
         $this->notification_count = 0;

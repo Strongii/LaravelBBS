@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use Illuminate\Support\Facades\Redis;
+use Symfony\Component\Routing\Route;
 
 class SignController extends Controller
 {
     public function sign(Request $request){
-        $redis = app('redis.connection');
+
         $daykey = now()->format('Ymd');
-        $user_id = $this->user->id;
-        return $user_id;
-//        $redis->bitset();
+        //$signStatus = Redis::del($daykey);
+        $user_id = Auth::id();
+        $signStatus = Redis::setbit($daykey,$user_id,1);
+        return redirect()->route('topics.index',compact($signStatus));
     }
 }

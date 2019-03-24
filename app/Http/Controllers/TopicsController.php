@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TopicRequest;
 use App\User;
+use Illuminate\Support\Facades\Redis;
 class TopicsController extends Controller
 {
     public function __construct()
@@ -23,12 +24,15 @@ class TopicsController extends Controller
 		$topics = $topic->withOrder($request->order)->paginate(20);
         $active_users = $user->getActiveUsers();
         $links = $link->getAllCached();
-        //dd($active_users);
-		return view('topics.index', compact('topics','active_users','links'));
+        if(Auth::check()){
+            $signStatus = $user->getSignStatus(Auth::id());
+        }
+        return view('topics.index', compact('topics','active_users','links','signStatus'));
 	}
 
     public function show(Topic $topic)
     {
+
         return view('topics.show', compact('topic'));
     }
 
