@@ -15,6 +15,6 @@ class SignController extends Controller
         //$signStatus = Redis::del($daykey);
         $user_id = Auth::id();
         $signStatus = Redis::setbit($daykey,$user_id,1);
-        return redirect()->route('topics.index',compact($signStatus));
+        return redirect()->route('topics.index');
     }
 }
